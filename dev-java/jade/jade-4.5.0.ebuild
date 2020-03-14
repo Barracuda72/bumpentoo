@@ -12,7 +12,7 @@ EANT_DOC_TARGET="doc"
 
 DESCRIPTION="JADE is FIPA-compliant Java Agent Development Environment"
 HOMEPAGE="http://jade.cselt.it/"
-SRC_URI="http://jade.tilab.com/dl.php?file=JADE-src-${PV}.zip -> ${P}.zip"
+SRC_URI="https://jade.tilab.com/dl.php?file=JADE-src-${PV}.zip -> ${P}.zip"
 #SRC_URI="mirror://gentoo/JADE-src-${PV}.zip -> ${P}.zip"
 
 LICENSE="LGPL-2"
