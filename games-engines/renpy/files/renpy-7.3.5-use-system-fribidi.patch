@@ -1,0 +1,39 @@
+--- module/renpybidicore.c.orig	2018-11-12 20:29:06.283911532 +0500
++++ module/renpybidicore.c	2018-11-12 20:29:12.861911507 +0500
+@@ -1,5 +1,5 @@
+ #include <Python.h>
+-#include <fribidi-src/lib/fribidi.h>
++#include <fribidi.h>
+ #include <stdlib.h>
+ 
+ #ifndef alloca
+--- module/setup.py.orig	2018-11-12 20:27:57.630911794 +0500
++++ module/setup.py	2018-11-12 20:28:34.336911654 +0500
+@@ -119,26 +119,12 @@
+     sdl + [ png, 'z', 'm' ])
+ 
+ FRIBIDI_SOURCES = """
+-fribidi-src/lib/fribidi.c
+-fribidi-src/lib/fribidi-arabic.c
+-fribidi-src/lib/fribidi-bidi.c
+-fribidi-src/lib/fribidi-bidi-types.c
+-fribidi-src/lib/fribidi-deprecated.c
+-fribidi-src/lib/fribidi-joining.c
+-fribidi-src/lib/fribidi-joining-types.c
+-fribidi-src/lib/fribidi-mem.c
+-fribidi-src/lib/fribidi-mirroring.c
+-fribidi-src/lib/fribidi-run.c
+-fribidi-src/lib/fribidi-shape.c
+ renpybidicore.c
+ """.split()
+ cython(
+     "_renpybidi",
+     FRIBIDI_SOURCES,
+-    includes=[
+-        BASE + "/fribidi-src/",
+-        BASE + "/fribidi-src/lib/",
+-        ],
++    libs=["fribidi"],
+     define_macros=[
+         ("FRIBIDI_ENTRY", ""),
+         ("HAVE_CONFIG_H", "1"),
