@@ -7,7 +7,6 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1 git-r3
 
-EGIT_HAS_SUBMODULES=1
 EGIT_REPO_URI="https://github.com/kaitai-io/kaitai_struct_python_runtime"
 
 DESCRIPTION="Kaitai Struct runtime for Python"
