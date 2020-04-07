@@ -17,4 +17,4 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="dev_python/read_version[toml,${PYTHON_USEDEP}]"
+DEPEND="dev-python/read_version[toml,${PYTHON_USEDEP}]"
