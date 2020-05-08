@@ -31,6 +31,8 @@ DEPEND="${RDEPEND}"
 
 RESTRICT="!test? ( test )"
 
+S="${WORKDIR}/${P/-python2/}"
+
 python_check_deps() {
 	use doc || return 0
 	has_version "dev-python/sphinx[${PYTHON_USEDEP}]"
