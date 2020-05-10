@@ -1,5 +1,5 @@
---- anki-2.1.0beta25/aqt/mediasrv.py
-+++ anki-2.1.0beta25/aqt/mediasrv.py
+--- anki-2.1.26/qt/aqt/mediasrv.py
++++ anki-2.1.26/qt/aqt/mediasrv.py
 @@ -13,7 +13,7 @@
  # locate web folder in source/binary distribution
  def _getExportFolder():

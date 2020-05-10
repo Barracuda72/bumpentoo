@@ -52,7 +52,7 @@ DEPEND="${RDEPEND}
 	)
 "
 
-PATCHES=( "${FILESDIR}"/${PN}-2.1.0_beta25-web-folder.patch )
+PATCHES=( "${FILESDIR}"/${PN}-2.1.26-web-folder.patch )
 
 pkg_setup() {
 	python-single-r1_pkg_setup
