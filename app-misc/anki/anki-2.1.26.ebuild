@@ -61,7 +61,7 @@ pkg_setup() {
 src_prepare() {
 	default
 	sed -i -e "s/updates=True/updates=False/" \
-		aqt/profiles.py || die
+		qt/aqt/profiles.py || die
 }
 
 src_compile() {
