@@ -84,12 +84,12 @@ src_install() {
 	doman qt/${PN}.1
 
 	dodoc README.md README.development
-	python_domodule qt/aqt anki
+	python_domodule qt/aqt pylib/anki
 	python_newscript qt/runanki anki
 
 	# Localization files go into the anki directory:
-	python_moduleinto anki
-	python_domodule locale
+	#python_moduleinto anki
+	#python_domodule locale
 
 	# not sure if this is correct, but
 	# site-packages/aqt/mediasrv.py wants the directory
