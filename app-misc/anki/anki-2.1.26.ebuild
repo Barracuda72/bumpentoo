@@ -79,13 +79,13 @@ src_test() {
 }
 
 src_install() {
-	doicon ${PN}.png
-	domenu ${PN}.desktop
-	doman ${PN}.1
+	doicon qt/${PN}.png
+	domenu qt/${PN}.desktop
+	doman qt/${PN}.1
 
 	dodoc README.md README.development
-	python_domodule aqt anki
-	python_newscript runanki anki
+	python_domodule qt/aqt anki
+	python_newscript qt/runanki anki
 
 	# Localization files go into the anki directory:
 	python_moduleinto anki
@@ -94,5 +94,5 @@ src_install() {
 	# not sure if this is correct, but
 	# site-packages/aqt/mediasrv.py wants the directory
 	insinto /usr/share/anki
-	doins -r web
+	doins -r qt/aqt_data/web
 }
