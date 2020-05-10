@@ -1,11 +1,15 @@
---- anki-2.1.26/qt/aqt/mediasrv.py
-+++ anki-2.1.26/qt/aqt/mediasrv.py
-@@ -13,7 +13,7 @@
- # locate web folder in source/binary distribution
- def _getExportFolder():
-     # running from source?
--    srcFolder = os.path.join(os.path.dirname(__file__), "..")
-+    srcFolder = os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "share", "anki")
-     webInSrcFolder = os.path.abspath(os.path.join(srcFolder, "web"))
-     if os.path.exists(webInSrcFolder):
-         return webInSrcFolder
+--- qt/aqt/utils.py	2020-05-11 01:01:13.293932971 +0500
++++ qt/aqt/utils.py	2020-05-11 01:04:05.775932313 +0500
+@@ -21,10 +21,10 @@
+ 
+ def aqt_data_folder() -> str:
+     # wheel install?
+-    dir = os.path.join(sys.prefix, "aqt_data")
++    dir = os.path.join(sys.prefix, "share", "anki", "aqt_data")
+     if not os.path.exists(dir) or not os.listdir(dir):
+         # running in place?
+-        dir = os.path.join(os.path.dirname(__file__), "..", "aqt_data")
++        dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "share", "anki", "aqt_data")
+     return dir
+ 
+ 
