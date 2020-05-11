@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>none@none.vg</email>
+		<name>Somebody Whoever</name>
+	</maintainer>
+	<use>
+		<flag name="asan">include address sanitizer checks (useful for debugging)</flag>
+		<flag name="clang">build with <pkg>sys-devel/clang</pkg> instead of GCC</flag>
+		<flag name="filteraudio">enable libfilteraudio support (not present in Gentoo as of yet)</flag>
+	</use>
+</pkgmetadata>
