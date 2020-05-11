@@ -17,7 +17,7 @@ https://github.com/compuphase/minIni/archive/${MININI_COMMIT}.tar.gz -> minIni-$
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="+dbus +filteraudio test clang asan"
+IUSE="+dbus filteraudio test clang asan"
 KEYWORDS="~amd64"
 
 RDEPEND="net-libs/tox:0/0.2[av]
