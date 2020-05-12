@@ -1,0 +1,10 @@
+--- a/CMakeLists.txt	2020-01-15 22:17:59.921502029 +0100
++++ b/CMakeLists.txt	2020-01-15 22:19:55.834885195 +0100
+@@ -77,7 +77,6 @@
+ set(RCC_OPTIONS -compress 9 -threshold 0)
+ 
+ # Use C++11.
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
+ 
