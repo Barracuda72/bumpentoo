@@ -1,0 +1,35 @@
+--- uTox-0.17.2/src/flist.c	2020-04-13 04:46:19.000000000 +0500
++++ uTox-0.17.2/src/flist.c	2020-05-19 19:12:20.647543256 +0500
+@@ -47,6 +47,7 @@
+ // full list of friends and group chats
+ static ITEM    *item;
+ static uint32_t itemcount;
++static const uint32_t max_item_count = 1024;
+ 
+ // list of chats actually shown in the GUI after filtering
+ // (actually indices pointing to chats in the chats array)
+@@ -283,10 +284,9 @@
+ 
+ /* returns address of item at current index and appends the group create entry */
+ static ITEM *newitem(void) {
+-    item       = realloc(item, (itemcount + 1) * sizeof(ITEM));
+-    shown_list = realloc(shown_list, (itemcount + 1) * sizeof(uint32_t));
+-    if (!item || !shown_list) {
+-        LOG_FATAL_ERR(EXIT_MALLOC, "flist", "Could not allocate memory for friend list.");
++    if (itemcount+1 > max_item_count)
++    {
++        LOG_FATAL_ERR(EXIT_MALLOC, "flist", "Maximum number of items exceeded");
+     }
+ 
+     unsigned int index = itemcount - 1;
+@@ -636,8 +636,8 @@
+     itemcount = self.friend_list_count + self.groups_list_count;
+     itemcount += 1; /* for ITEM_GROUP_CREATE */
+ 
+-    item       = calloc(itemcount, sizeof(ITEM));
+-    shown_list = calloc(itemcount, sizeof(uint32_t));
++    item       = calloc(max_item_count, sizeof(ITEM));
++    shown_list = calloc(max_item_count, sizeof(uint32_t));
+     if (!item || !shown_list) {
+         LOG_FATAL_ERR(EXIT_MALLOC, "flist", "Could not allocate memory for friend list.");
+     }

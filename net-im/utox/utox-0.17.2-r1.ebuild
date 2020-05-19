@@ -41,6 +41,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${MY_P}-use-system-stb.patch
+	"${FILESDIR}"/${MY_P}-workaround-group-chat-crash.patch
 )
 
 S="${WORKDIR}/${MY_P}"
