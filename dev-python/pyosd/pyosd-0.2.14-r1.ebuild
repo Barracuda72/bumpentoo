@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit distutils-r1
 
@@ -17,6 +17,10 @@ IUSE="doc examples"
 
 DEPEND=">=x11-libs/xosd-2.2.4"
 RDEPEND="${DEPEND}"
+
+PATCHES=(
+	"${P}-py3-support.patch"
+)
 
 python_install_all() {
 	use doc && local HTML_DOCS=( pyosd.html )

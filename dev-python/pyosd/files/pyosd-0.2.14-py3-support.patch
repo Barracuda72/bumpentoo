@@ -1,0 +1,125 @@
+diff -Naur pyosd-0.2.14.orig/modules/battery.py pyosd-0.2.14/modules/battery.py
+--- pyosd-0.2.14.orig/modules/battery.py	2005-08-25 03:05:53.000000000 +0600
++++ pyosd-0.2.14/modules/battery.py	2020-06-27 10:12:59.356719430 +0500
+@@ -25,7 +25,7 @@
+ STATE_FILE = "state"
+ INFO_FILE = "info"
+ 
+-import commands
++import subprocess
+ import os
+ import re
+ import string
+diff -Naur pyosd-0.2.14.orig/modules/volume.py pyosd-0.2.14/modules/volume.py
+--- pyosd-0.2.14.orig/modules/volume.py	2003-08-10 11:06:29.000000000 +0600
++++ pyosd-0.2.14/modules/volume.py	2020-06-27 10:12:59.410719430 +0500
+@@ -13,7 +13,7 @@
+ Plugin for PyOSDd which facilitates changing volume
+ """
+ 
+-import commands
++import subprocess
+ import os
+ import re
+ 
+@@ -45,7 +45,7 @@
+         signal.signal(signal.SIGCHLD, signal.SIG_DFL)
+ 
+         # read volume in
+-        output = commands.getoutput("aumix -q")
++        output = subprocess.getoutput("aumix -q")
+         # locate main volume
+         m = re.match("vol (\d+),", output)
+         vol = int(m.group(1))
+diff -Naur pyosd-0.2.14.orig/pyosd/daemon.py pyosd-0.2.14/pyosd/daemon.py
+--- pyosd-0.2.14.orig/pyosd/daemon.py	2004-01-26 06:14:01.000000000 +0500
++++ pyosd-0.2.14/pyosd/daemon.py	2020-06-27 10:12:59.523719430 +0500
+@@ -60,9 +60,9 @@
+     args = []
+     kwargs = {'shadow': 0}
+ 
+-    pyosd.daemon.top = apply(pyosd.osd, args, kwargs)
++    pyosd.daemon.top = pyosd.osd(*args, **kwargs)
+     pyosd.daemon.top.set_pos(pyosd.POS_TOP)
+-    pyosd.daemon.bot = apply(pyosd.osd, args, kwargs)
++    pyosd.daemon.bot = pyosd.osd(*args, **kwargs)
+     pyosd.daemon.bot.set_pos(pyosd.POS_BOT)
+ 
+     pyosd.daemon.top.set_outline_offset(1)
+@@ -75,14 +75,14 @@
+         for f in files:
+             try:
+                 namespace = {}
+-                execfile(os.path.join(MODULES_DIR, f), namespace)
++                exec(compile(open(os.path.join(MODULES_DIR, f), "rb").read(), os.path.join(MODULES_DIR, f), 'exec'), namespace)
+                 c = namespace['plugin']()
+             except:
+-                print "Unable to load module: %s" % f
++                print("Unable to load module: %s" % f)
+                 error=1
+ 
+             if not error:
+-                print "Adding plugin: %s" % f
++                print("Adding plugin: %s" % f)
+                 for k in c.plugin_keys:
+                     modules[k] = c
+ 
+@@ -97,15 +97,15 @@
+             s = string.split(line)
+ 
+             if not s:
+-                print "Not s"
++                print("Not s")
+                 return
+ 
+             cmd = s[0]
+ 
+-            if PyOSDServ.modules.has_key(cmd):
+-                apply(getattr(PyOSDServ.modules[cmd], cmd), s[1:])
++            if cmd in PyOSDServ.modules:
++                getattr(PyOSDServ.modules[cmd], cmd)(*s[1:])
+             else:
+-                print "Unknown command: %s" % line
++                print("Unknown command: %s" % line)
+ 
+ 
+     factory = Factory()
+@@ -114,7 +114,7 @@
+     pyosd.daemon.reactor = reactor
+ 
+     if allinterfaces:
+-        print "Binding to all interfaces.."
++        print("Binding to all interfaces..")
+         reactor.listenTCP(8007, factory) #, interface='127.0.0.1')
+     else:
+         reactor.listenTCP(8007, factory, interface='127.0.0.1')
+diff -Naur pyosd-0.2.14.orig/pyosd/__init__.py pyosd-0.2.14/pyosd/__init__.py
+--- pyosd-0.2.14.orig/pyosd/__init__.py	2005-08-29 13:23:48.000000000 +0600
++++ pyosd-0.2.14/pyosd/__init__.py	2020-06-27 10:12:59.480719430 +0500
+@@ -121,7 +121,7 @@
+         """
+ 
+         if line >= self.get_number_lines() or line < 0:
+-            raise ValueError, "specified line is out of range"
++            raise ValueError("specified line is out of range")
+ 
+         if type==TYPE_STRING:
+             _pyosd.display_string(self._osd, line, arg)
+@@ -133,7 +133,7 @@
+             _pyosd.display_slider(self._osd, line, int(arg))
+ 
+         else:
+-            raise ValueError, "type not in list of valid values!"
++            raise ValueError("type not in list of valid values!")
+ 
+     def set_font(self, font):
+         """Change the font.
+@@ -208,7 +208,7 @@
+     def scroll(self, lines=1):
+         """Scroll the display."""
+         if lines >= self.get_number_lines() or lines < 0:
+-            raise ValueError, "specified line is out of range"
++            raise ValueError("specified line is out of range")
+         _pyosd.scroll(self._osd, lines)
+ 
+     def hide(self):
