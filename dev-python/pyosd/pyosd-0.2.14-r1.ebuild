@@ -19,7 +19,7 @@ DEPEND=">=x11-libs/xosd-2.2.4"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${P}-py3-support.patch"
+	"${FILESDIR}"/${P}-py3-support.patch
 )
 
 python_install_all() {
