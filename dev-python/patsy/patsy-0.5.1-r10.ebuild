@@ -22,7 +22,7 @@ RDEPEND="
 	"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	sci-libs/scipy[${PYTHON_USEDEP}]
+	dev-python/scipy[${PYTHON_USEDEP}]
 	doc? (
 		dev-python/ipython[${PYTHON_USEDEP}]
 		dev-python/matplotlib[${PYTHON_USEDEP}]

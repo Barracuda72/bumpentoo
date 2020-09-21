@@ -19,7 +19,7 @@ IUSE=""
 
 RDEPEND="
 	>=dev-python/numpy-1.3
-	>=sci-libs/scipy-0.7
+	>=dev-python/scipy-0.7
 	sci-libs/smart_open
 	dev-python/boto
 	dev-python/boto3

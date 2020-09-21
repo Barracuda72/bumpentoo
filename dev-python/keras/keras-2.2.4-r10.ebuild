@@ -22,7 +22,7 @@ DEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 	>=sci-libs/keras-applications-1.0.6[${PYTHON_USEDEP}]
 	>=sci-libs/keras-preprocessing-1.0.5[${PYTHON_USEDEP}]
-	sci-libs/scipy[${PYTHON_USEDEP}]
+	dev-python/scipy[${PYTHON_USEDEP}]
 "
 
 RDEPEND="${DEPEND}"

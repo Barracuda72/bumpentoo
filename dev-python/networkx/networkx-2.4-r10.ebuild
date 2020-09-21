@@ -28,7 +28,7 @@ COMMON_DEPEND="
 		>=sci-libs/gdal-1.10.0[python,${PYTHON_USEDEP}]
 	)
 	pandas? ( >=dev-python/pandas-0.23.3[${PYTHON_USEDEP}] )
-	scipy? ( >=sci-libs/scipy-1.1.0[${PYTHON_USEDEP}] )
+	scipy? ( >=dev-python/scipy-1.1.0[${PYTHON_USEDEP}] )
 	xml? ( >=dev-python/lxml-4.2.3[${PYTHON_USEDEP}] )
 	yaml? ( >=dev-python/pyyaml-3.13[${PYTHON_USEDEP}] )"
 DEPEND="
