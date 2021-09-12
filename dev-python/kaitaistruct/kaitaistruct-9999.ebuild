@@ -18,3 +18,5 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="dev-python/read_version[toml,${PYTHON_USEDEP}]"
+
+DISTUTILS_USE_SETUPTOOLS=pyproject.toml
