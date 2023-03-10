@@ -1,0 +1,19 @@
+--- festival.orig/src/main/Makefile	2023-03-11 01:21:59.407917820 +0500
++++ festival/src/main/Makefile	2023-03-11 01:21:50.350917544 +0500
+@@ -54,13 +54,13 @@
+ endif
+ 
+ festival: festival_main.o $(LIBDEPS)
+-	$(LINK_COMMAND) -o festival festival_main.o $(LIBS)
++	$(LINK_COMMAND) -o festival -ltinfo festival_main.o $(LIBS)
+ 
+ festival_client: festival_client.o $(REQUIRED_LIBDEPS)
+-	$(LINK_COMMAND) -o festival_client festival_client.o $(LIBS)
++	$(LINK_COMMAND) -o festival_client -ltinfo festival_client.o $(LIBS)
+ 
+ $(ETCDIR)/audsp: $(ETCDIR)/.made audsp.o $(LIBDEPS)
+-	$(LINK_COMMAND) -o $(ETCDIR)/audsp audsp.o $(LIBS)
++	$(LINK_COMMAND) -o $(ETCDIR)/audsp -ltinfo audsp.o $(LIBS)
+ 
+ # Can't just rely on the dir as it gets updated with new files
+ # check for the data of a file created in etcdir

@@ -51,6 +51,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}/${P}-ldflags.patch"
 	epatch "${FILESDIR}/${P}-init-scm.patch"
+	epatch "${FILESDIR}/${P}-use-tinfo.patch"
 	#epatch "${FILESDIR}/${P}-gentoo-system.patch"
 
 	# copy what we need for MultiSyn from speech_tools.
@@ -71,7 +72,7 @@ src_configure() {
 src_compile() {
 	emake -j1 PROJECT_LIBDEPS="" REQUIRED_LIBDEPS="" LOCAL_LIBDEPS="" \
 		OPTIMISE_CXXFLAGS="${CXXFLAGS}" OPTIMISE_CCFLAGS="${CFLAGS}" \
-		LDFLAGS="${LDFLAGS}" \
+		LDFLAGS="${LDFLAGS} -ltinfo" \
 		CC="$(tc-getCC) -std=gnu++98 -fno-delete-null-pointer-checks" \
 		CXX="$(tc-getCXX) -std=gnu++98 -fno-delete-null-pointer-checks" || die "emake failed"
 }
@@ -94,7 +95,7 @@ src_install() {
 	for ex in "${D}"/usr/share/doc/${PF}/examples/*.sh; do
 		exnoext=${ex%%.sh}
 		chmod a+x "${exnoext}"
-		dosed "s:${S}/bin/festival:/usr/bin/festival:" "${exnoext##$D}"
+		sed "s:${S}/bin/festival:/usr/bin/festival:" "${exnoext##$D}"
 	done
 
 	# Install the header files
@@ -105,7 +106,7 @@ src_install() {
 	doins lib/site*
 
 	# Install the docs
-	dodoc "${S}"/{ACKNOWLEDGMENTS,NEWS,README}
+	dodoc "${S}"/{ACKNOWLEDGMENTS,NEWS,README.md}
 	doman "${S}"/doc/{festival.1,festival_client.1}
 
 	# create the directory where our log file will go.
