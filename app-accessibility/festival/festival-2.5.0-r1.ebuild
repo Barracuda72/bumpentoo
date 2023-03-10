@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/app-accessibility/festival/festival-2.1-r1.ebuild,v 1.11 2015/05/17 20:02:41 pacho Exp $
 
 EAPI="6"
-inherit eutils multilib toolchain-funcs user eapi7-ver
+inherit eutils multilib toolchain-funcs eapi7-ver
 
 MY_PV="${PV}-release"
 MY_P=${PN}-${MY_PV}
@@ -30,13 +30,13 @@ IUSE=""
 
 DEPEND="~app-accessibility/speech-tools-2.5.0
 		>=sys-libs/ncurses-5.6-r2"
-RDEPEND="${DEPEND}"
+RDEPEND="
+	${DEPEND}
+	acct-user/festival
+	acct-group/festival
+"
 
 S=${WORKDIR}/festival
-
-pkg_setup() {
-	enewuser festival -1 -1 -1 audio
-}
 
 src_prepare() {
 	# tell festival to use the speech-tools we have installed.
