@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-accessibility/festival/festival-2.1-r1.ebuild,v 1.11 2015/05/17 20:02:41 pacho Exp $
 
-EAPI="2"
+EAPI="6"
 inherit eutils multilib toolchain-funcs user eapi7-ver
 
 MY_PV="${PV}-release"
@@ -60,6 +60,8 @@ src_prepare() {
 
 	echo "(Parameter.set 'Audio_Command \"aplay -q -c 1 -t raw -f s16 -r \$SR \$FILE\")" >> "${S}"/lib/siteinit.scm
 	echo "(Parameter.set 'Audio_Method 'Audio_Command)" >> "${S}"/lib/siteinit.scm
+
+	eapply_user
 }
 
 src_configure() {
