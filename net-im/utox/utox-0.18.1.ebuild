@@ -5,7 +5,7 @@
 EAPI=7
 
 MY_P="uTox-${PV}"
-inherit cmake-utils
+inherit cmake
 
 MININI_COMMIT="b40dff4924461272f669814da7d0c9fdc8be6d94"
 QRCODEGEN_VERSION="1.6.0"
@@ -39,11 +39,6 @@ RDEPEND="net-libs/tox:0/0.2[av]
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-PATCHES=(
-	"${FILESDIR}"/${MY_P}-use-system-stb.patch
-	"${FILESDIR}"/${MY_P}-workaround-group-chat-crash.patch
-)
-
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
@@ -52,11 +47,11 @@ src_prepare() {
 	#  file INSTALL cannot find
 	#  "/var/tmp/portage/net-im/uTox-0.11.1/work/uTox-0.11.1/utox".
 	sed -i "s/^\s*utox$/\$\{CMAKE_CURRENT_BINARY_DIR\}\/utox/g" ${S}/CMakeLists.txt
-	mv -v ../QR-Code-generator-${QRCODEGEN_VERSION}/c third-party/qrcodegen/
-	mv -v ../minIni-${MININI_COMMIT}/dev/ third-party/minini/
+	mv -v ../QR-Code-generator-${QRCODEGEN_VERSION}/c third_party/qrcodegen/qrcodegen/
+	mv -v ../minIni-${MININI_COMMIT}/* third_party/minini/minini/
 
 	#epatch_user
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -79,5 +74,5 @@ src_configure() {
 		-DENABLE_ASAN=$(usex asan "ON" "OFF")\
 		-DCMAKE_C_COMPILER=$(usex clang "clang" "gcc")
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
