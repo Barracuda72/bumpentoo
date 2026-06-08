@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{8,9,10,11} )
+PYTHON_COMPAT=( python3_{12,13,14,15} )
 
 inherit multilib python-r1 scons-utils toolchain-funcs git-r3
 
